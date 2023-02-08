@@ -50,7 +50,6 @@ pipeline {
         bat 'gradlew javadoc'
         archiveArtifacts 'build/libs/*.jar'
 
-
       }
     }
 
