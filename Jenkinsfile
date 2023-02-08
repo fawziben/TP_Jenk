@@ -22,7 +22,7 @@ pipeline {
         stage('Code Analysis') {
           steps {
             withSonarQubeEnv('sonar') {
-              bat 'gradle sonar'
+              bat 'gradlew sonar'
             }
 
 
@@ -46,8 +46,8 @@ pipeline {
 
 
       steps {
-        bat(script: 'gradle build', label: 'gradle build')
-        bat 'gradle javadoc'
+        bat(script: 'gradlew build', label: 'gradlew build')
+        bat 'gradlew javadoc'
         archiveArtifacts 'build/libs/*.jar'
 
 
@@ -56,7 +56,7 @@ pipeline {
 
      stage('Deploy') {
       steps {
-        bat 'gradle publish'
+        bat 'gradlew publish'
       }
     }
 
