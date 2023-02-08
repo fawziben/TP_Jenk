@@ -55,11 +55,7 @@ pipeline {
       }
     }
 
-     stage('Deploy') {
-      steps {
-     //   bat 'gradlew publish'
-     }
-    }
+
 
      stage('Notification') {
       steps {
