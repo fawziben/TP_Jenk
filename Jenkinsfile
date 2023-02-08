@@ -73,7 +73,6 @@ pipeline {
   post {
         failure {
             notifyEvents message: 'Failed deployed', token: 'cDNnrGsMlftwwTnvRVoK6jVAKkLK_iYA'
-
             }
       }
 
