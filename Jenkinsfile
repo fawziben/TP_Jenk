@@ -55,9 +55,7 @@ pipeline {
     }
 
      stage('deploy') {
-                         steps {
-                          bat './gradlew publish'
-                         }
+
                          post{
                                                      always{
                                                          slackSend(  message: "Deployment successful",)
