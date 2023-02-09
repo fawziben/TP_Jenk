@@ -54,11 +54,7 @@ pipeline {
       }
     }
 
-     stage('Deploy') {
-           steps {
-             bat 'gradlew publish'
-           }
-         }
+
      stage('Notification') {
       steps {
         notifyEvents message: 'Successfully deployed', token: 'cDNnrGsMlftwwTnvRVoK6jVAKkLK_iYA'
