@@ -20,16 +20,13 @@ repositories {
 publishing {
     repositories {
         maven {
-            url ="https://mymavenrepo.com/repo/gapJSjvPN58HQGGQyhxC/"
+            url System.getenv("url")
             credentials {
-                username = "myMavenRepo"
-                password = "admin"
+                username System.getenv("username")
+                password System.getenv("password")
             }
         }
     }
-
-
-
 
     publications {
         maven(MavenPublication) {
