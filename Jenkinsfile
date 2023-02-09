@@ -54,11 +54,20 @@ pipeline {
       }
     }
 
-     stage('Deploy') {
-      steps {
-        bat 'gradlew publish'
-      }
-    }
+     stage('deploy') {
+                         steps {
+                          bat './gradlew publish'
+                         }
+                         post{
+                                                     always{
+                                                         slackSend(  message: "Deployment successful",)
+                                                         mail to: "benmoumenfawzi@gmail.com",
+                                                         subject: "New build !!",
+                                                         body: "Jenkins new build !!"
+                                                     }
+                                                 }
+
+                         }
 
      stage('Notification') {
       steps {
