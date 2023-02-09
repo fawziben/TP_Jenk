@@ -54,21 +54,38 @@ pipeline {
       }
     }
 
+     stage('build'){
+                             steps {
+                                 bat './gradlew build'
+                                 bat './gradlew jar'
+                                 bat './gradlew javadoc'
+                                 archiveArtifacts 'build/libs/*.jar'
 
-     stage('Notification') {
-      steps {
-        notifyEvents message: 'Successfully deployed', token: 'cDNnrGsMlftwwTnvRVoK6jVAKkLK_iYA'
+                             }
+
+                         }
+                         stage('deploy') {
+                         steps {
+                          bat './gradlew publish'
+                         }
+                         post{
+                                                     always{
+                                                         mail to: "if_benmoumen@esi.dz",
+                                                         subject: "New build !!",
+                                                         body: "Jenkins new build !!"
+                                                     }
+                                                 }
+
+                         }
+     }
+     post {
+           always {
+             junit skipPublishingChecks: true, testResults: 'build/test-results/test/TEST-Matrix.xml'
+             archiveArtifacts 'build/test-results/test/TEST-Matrix.xml'
+           }
+           failure {  mail to: "if_benmoumen@esi.dz",
+                      subject: "Failure Email",
+                      body: "Build failed"
+           }
         }
-
-      }
-    }
-
-
-  post {
-        failure {
-            notifyEvents message: 'Failed deployed', token: 'cDNnrGsMlftwwTnvRVoK6jVAKkLK_iYA'
-
-            }
-      }
-
  }
