@@ -46,26 +46,19 @@ pipeline {
 
 
       steps {
-        bat(script: 'gradlew build', label: 'gradlew build')
+        bat(script: 'gradlew build', label: 'gradle build')
         bat 'gradlew javadoc'
         archiveArtifacts 'build/libs/*.jar'
-
 
 
       }
     }
 
-
-
-
-
      stage('Deploy') {
       steps {
-     //   bat 'gradlew publish'
-     }
+        bat 'gradlew publish'
+      }
     }
-
-
 
      stage('Notification') {
       steps {
@@ -79,6 +72,7 @@ pipeline {
   post {
         failure {
             notifyEvents message: 'Failed deployed', token: 'cDNnrGsMlftwwTnvRVoK6jVAKkLK_iYA'
+
             }
       }
 
